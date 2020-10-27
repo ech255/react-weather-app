@@ -138,7 +138,7 @@ class Weather extends React.Component {
             }
 			return (
                 <div className="weather-container">
-                    <h1>Forecastr</h1>
+                    <h1>Bright Skies</h1>
                     <CurrentWeather weatherData={this.state.weatherData} units={this.state.units} units_set={this.state.units_set} />
                     <div>
                         <input type="radio" value="metric" name="units" checked={this.state.units === "metric"} onChange={event => this.setUnits(event)} /> Metric
