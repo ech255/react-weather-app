@@ -1,5 +1,7 @@
 import React from 'react';
 import CurrentWeather from './CurrentWeather';
+import WeeklyWeather from './WeeklyWeather';
+
 
 class Weather extends React.Component {
     constructor(props) {
@@ -138,6 +140,17 @@ class Weather extends React.Component {
             // don't render weather block until the component is loaded
             return <div>Loading...</div>;
         } else {
+            var weeklyWeatherComponents = [];
+            for (var i = 0; i < 7; i++) {
+                weeklyWeatherComponents.push(
+                    <WeeklyWeather
+                        weatherData = {this.state.weatherData}
+                        dayValue = {[i]}
+                        units={this.state.units}
+                        units_set={this.state.units_set}
+                    />
+                );
+            }
 			return (
                 <div>
                     <h1>Forecastr</h1>
@@ -146,6 +159,10 @@ class Weather extends React.Component {
                         <input type="radio" value="metric" name="units" checked={this.state.units === "metric"} onChange={event => this.setUnits(event)} /> Metric
                         <input type="radio" value="imperial" name="units" checked={this.state.units === "imperial"} onChange={event => this.setUnits(event)} /> US
                     </div>
+                    <div>
+                        {weeklyWeatherComponents}
+                    </div>
+                    
                 </div>
             )
         }

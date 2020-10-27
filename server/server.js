@@ -1,11 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const parser = require('body-parser');
-var cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
+var cors = require('cors');
 
-// keys for APIs
+// key for APIs
 const owm_key = process.env.OWM_KEY
 
 // start express

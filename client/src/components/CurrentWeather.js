@@ -1,4 +1,6 @@
 import React from 'react';
+import WeatherIcon from './WeatherIcon';
+
 
 class CurrentWeather extends React.Component {
     constructor(props) {
@@ -15,6 +17,7 @@ class CurrentWeather extends React.Component {
             <div>
                 <div>
                     <h4>{Math.round(weatherData.current.temp)}&deg;{units_set[0]} {weatherData.current.weather[0].description}</h4>
+                    <WeatherIcon weatherData={this.props.weatherData} />
                     <div>High: {Math.round(weatherData.daily[0].temp.max)}&deg;{units_set[0]}</div>
                     <div>Low: {Math.round(weatherData.daily[0].temp.min)}&deg;{units_set[0]}</div>
                     <div>Humidity: {weatherData.current.humidity}%</div>
