@@ -21,6 +21,15 @@ app.use(function(req, res, next) {
     next();
 });
 
+// deliver client build (Heroku)
+if (process.env.NODE_ENV === 'production') {
+        // Exprees will serve up production assets
+        app.use(express.static('client/build'));
+        app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
 // call to openweathermap
 app.post('/forecastData', (req, res) => {
     reqData = req.body;
