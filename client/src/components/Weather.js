@@ -40,7 +40,7 @@ class Weather extends React.Component {
         };
         console.log(postData);
         // fetch weather data from server
-        fetch('http://localhost:5555/forecastData', {
+        fetch('/forecastData', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'},
