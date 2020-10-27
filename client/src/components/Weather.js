@@ -1,5 +1,6 @@
 import React from 'react';
 import CurrentWeather from './CurrentWeather';
+import LocationMap from './LocationMap';
 import WeeklyWeather from './WeeklyWeather';
 
 
@@ -87,22 +88,6 @@ class Weather extends React.Component {
         // if error was detected, indicate cause
         .catch(
             (error) => {
-                var msg = null;
-                switch(error.code) {
-                    case error.PERMISSION_DENIED:
-                        msg = "User denied the request for Geolocation.";
-                        break;
-                    case error.POSITION_UNAVAILABLE:
-                        msg = "Location information is unavailable.";
-                        break;
-                    case error.TIMEOUT:
-                        msg = "The request to get user location timed out.";
-                        break;
-                    case error.UNKNOWN_ERROR:
-                        msg = "An unknown error occurred.";
-                        break;
-                }
-                console.log(msg);
                 this.setState({
                     isLoaded: true,
                     error
@@ -152,17 +137,17 @@ class Weather extends React.Component {
                 );
             }
 			return (
-                <div>
+                <div className="weather-container">
                     <h1>Forecastr</h1>
                     <CurrentWeather weatherData={this.state.weatherData} units={this.state.units} units_set={this.state.units_set} />
                     <div>
                         <input type="radio" value="metric" name="units" checked={this.state.units === "metric"} onChange={event => this.setUnits(event)} /> Metric
                         <input type="radio" value="imperial" name="units" checked={this.state.units === "imperial"} onChange={event => this.setUnits(event)} /> US
                     </div>
-                    <div>
+                    <div className="weekly-weather-container">
                         {weeklyWeatherComponents}
                     </div>
-                    
+                    <LocationMap lat={this.state.lat} lon={this.state.lon}/>
                 </div>
             )
         }

@@ -14,9 +14,11 @@ class WeeklyWeather extends React.Component {
         const monthArray = ['January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'];
 
 		return (
-            <div>
-                <h4>{dayArray[date.getDay()]} {monthArray[date.getMonth()]} {date.getDate()}</h4>
-                <h4>{weatherData.daily[dayValue].weather[0].description}</h4>
+            <div className="weekly-weather-box">
+                <div>
+                    <h4>{dayArray[date.getDay()]} {monthArray[date.getMonth()]} {date.getDate()}</h4>
+                    <h4>{weatherData.daily[dayValue].weather[0].description}</h4>
+                </div> 
                 <WeeklyWeatherIcon 
                     weatherData={this.props.weatherData}
                     dayValue={this.props.dayValue}
