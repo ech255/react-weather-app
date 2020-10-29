@@ -92,16 +92,22 @@ class GetLocation extends React.Component {
             const weatherSection = this.state.isLocated ? <Weather lat={this.state.lat} lon={this.state.lon} /> : ""
             return (
                 <div>
-                    <h1>Bright Skies</h1>
-                    <input type="button" value="Get Location" onClick={this.getLocationClick} />
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            <input type="text" placeholder="Zip Code" value={this.state.zipcode} onChange={this.handleChange} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
+                    <div className="title-container">
+                        <h1>Bright Skies</h1>
+                        Enable GPS or Enter your Zip Code
+                        <div className="location-container">
+                            <input type="button" value="Get Location" onClick={this.getLocationClick} />
+                            <form onSubmit={this.handleSubmit}>
+                                <label>
+                                    <input type="text" placeholder="Zip Code" value={this.state.zipcode} onChange={this.handleChange} />
+                                </label>
+                                <input type="submit" value="Submit" />
+                            </form>
+                        </div>
+                    </div>
                     {weatherSection}
-                </div>
+                    </div>
+                
             )
         }
     }

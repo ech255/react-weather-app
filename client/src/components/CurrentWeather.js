@@ -16,6 +16,7 @@ class CurrentWeather extends React.Component {
         return (
             <div>
                 <div>
+                    <h3>Current Conditions</h3>
                     <h4>{Math.round(weatherData.current.temp)}&deg;{units_set[0]} {weatherData.current.weather[0].description}</h4>
                     <WeatherIcon weatherData={this.props.weatherData} />
                     <div>High: {Math.round(weatherData.daily[0].temp.max)}&deg;{units_set[0]}</div>

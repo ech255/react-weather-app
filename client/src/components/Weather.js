@@ -96,11 +96,12 @@ class Weather extends React.Component {
             }
 			return (
                 <div className="weather-container">
-                    <CurrentWeather weatherData={this.state.weatherData} units={this.state.units} units_set={this.state.units_set} />
                     <div>
                         <input type="radio" value="metric" name="units" checked={this.state.units === "metric"} onChange={event => this.setUnits(event)} /> Metric
                         <input type="radio" value="imperial" name="units" checked={this.state.units === "imperial"} onChange={event => this.setUnits(event)} /> US
                     </div>
+                    <CurrentWeather weatherData={this.state.weatherData} units={this.state.units} units_set={this.state.units_set} />
+                    <h3>Weekly Forecast</h3>
                     <div className="weekly-weather-container">
                         {weeklyWeatherComponents}
                     </div>

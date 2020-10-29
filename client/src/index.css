@@ -12,6 +12,27 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+h3 {
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+.title-container {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: auto;
+}
+
+.location-container input[type=button] {
+	margin-top: 15px;
+}
+
+.location-container form {
+	margin-top: 15px;
+}	
+
 .weather-container {
 	text-align: center;
 	display: flex;
@@ -21,11 +42,10 @@ code {
 	text-transform: capitalize;
 }
 
-@media(min-width:576px) {
-	.weekly-weather-container {
-		display: flex;
-		flex-flow: column;
-	}
+.weekly-weather-box {
+	height: 250px;
+	display: flex;
+	flex-flow: column;
 }
 
 @media(min-width:768px) {
@@ -38,18 +58,36 @@ code {
 
 	.weekly-weather-box {
 		width: 14%;
-		height: 400px;
+		height: 300px;
 		display: flex;
 		flex-flow: column;
 		justify-content: space-between;
-	}	
+	}
 }
 
-.weekly-weather-box {
-	height: 300px;
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
+@media(max-width:576px) {
+	.weekly-weather-container {
+		display: flex;
+		flex-flow: column;
+	}
+
+	.location-container {
+		text-align: center;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		width: auto;
+	}
+}
+
+@media(min-width:576px) {
+	.location-container {
+		text-align: center;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		width: auto;
+	}
 }
 
 .map-container {
