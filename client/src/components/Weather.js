@@ -9,33 +9,22 @@ class Weather extends React.Component {
 		super(props);
 		this.state = {
             error: null,
-            isLocated: false,
 			isLoaded: false,
             weatherData: [],
-            lat: null,
-            lon: null,
             units: "imperial",
             units_set: ["F", "mph"]
 		};
     }
 
-    // promise wrapper for geolocation
-    getCurrentPosition() {
-        if (navigator.geolocation) {
-            return new Promise(
-                (resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject)
-            )
-        } else {
-            return new Promise(
-                resolve => resolve({})
-            )
-        }
+    // after component loads call the server for weather data
+    componentDidMount() {
+        this.getWeatherData();
     }
 
     getWeatherData() {
         var postData = {
-            lat: this.state.lat,
-            lon: this.state.lon,
+            lat: this.props.lat,
+            lon: this.props.lon,
             units: this.state.units
         };
         console.log(postData);
@@ -59,37 +48,6 @@ class Weather extends React.Component {
             // capture error codes from server
             (error) => {
                 this.setState({
-                    error
-                });
-            }
-        )
-    }
-
-    // after component loads call the server for weather data
-    componentDidMount() {
-        // call geolocation function
-        this.getCurrentPosition()
-        .then(
-            (position) => {
-                // pass coordinates to API call if successfully acquired
-                if (position.coords) {
-                    // set state values
-                    this.setState({
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude,
-                        isLocated: true
-                    });
-                    this.getWeatherData();
-                } else {
-                    console.error("Geolocation is unsupported by this browser.");
-                }
-            }
-        )
-        // if error was detected, indicate cause
-        .catch(
-            (error) => {
-                this.setState({
-                    isLoaded: true,
                     error
                 });
             }
@@ -121,7 +79,7 @@ class Weather extends React.Component {
         // reload after weather data gathered
         if (this.state.error) {
             return <div>Error: {this.state.error.message}</div>;
-        } else if (!this.state.isLoaded) {
+        } else if (!this.state.isLoaded ) {
             // don't render weather block until the component is loaded
             return <div>Loading...</div>;
         } else {
@@ -138,7 +96,6 @@ class Weather extends React.Component {
             }
 			return (
                 <div className="weather-container">
-                    <h1>Bright Skies</h1>
                     <CurrentWeather weatherData={this.state.weatherData} units={this.state.units} units_set={this.state.units_set} />
                     <div>
                         <input type="radio" value="metric" name="units" checked={this.state.units === "metric"} onChange={event => this.setUnits(event)} /> Metric
@@ -147,7 +104,7 @@ class Weather extends React.Component {
                     <div className="weekly-weather-container">
                         {weeklyWeatherComponents}
                     </div>
-                    <LocationMap lat={this.state.lat} lon={this.state.lon}/>
+                    <LocationMap lat={this.props.lat} lon={this.props.lon}/>
                 </div>
             )
         }

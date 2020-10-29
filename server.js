@@ -3,6 +3,7 @@ const express = require('express');
 const parser = require('body-parser');
 const fetch = require('node-fetch');
 const path = require('path');
+const nodegeocoder = require('node-geocoder');
 var cors = require('cors');
 
 // key for APIs
@@ -29,9 +30,28 @@ app.post('/forecastData', (req, res) => {
     fetch(owm_api)
     .then(res => res.json())
     .then((json) => {
-        // console.log(json);
+        console.log(json);
         res.json(json);
     });
+});
+
+app.post('/locationData', (req, res) => {
+    reqData = req.body;
+    console.log(req.body);
+    let options = {
+        provider: 'openstreetmap'
+    };
+    // get geocode data for zipcode and send to client
+    let geocoder = nodegeocoder(options);
+    var location = {};
+    geocoder.geocode(req.body.zipcode)
+    .then((geores)=> {
+        res.json(geores);
+    })
+    .catch((err)=> {
+        console.log(err);
+    });
+    
 });
 
 // deliver client build (Heroku)
@@ -43,5 +63,5 @@ if (process.env.NODE_ENV === 'production') {
 });
 }
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on ${port}`));
